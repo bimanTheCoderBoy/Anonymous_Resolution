@@ -20,7 +20,7 @@ const runserver = async () => {
     await dbConnect();
     //Middleware
     app.use(cors({
-        origin: "*",
+        origin: "http://localhost:5173",
         methods: "GET,POST,DELETE",
         credentials: true
     }))
@@ -87,9 +87,12 @@ const runserver = async () => {
    //middleware for error handling
    app.use(errHandler)
 
-    app.get("/*", (req, res) => {
+    app.get("/test", (req, res) => {
         console.log("authenticated");
-        res.send("ok server working")
+        res.json({
+            success:true,
+            message:"user authenticated"
+        })
     })
     const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {
