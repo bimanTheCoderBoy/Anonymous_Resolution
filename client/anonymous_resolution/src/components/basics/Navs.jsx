@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { MdAddCircleOutline } from "react-icons/md";
 
 const Navs = () => {
+   
     const location = useLocation();
     const [active, setActive] = useState(0);
     const setting = () => {
