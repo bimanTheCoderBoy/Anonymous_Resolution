@@ -5,7 +5,7 @@ const { createUser, getYourSavedResolutions, saveResolution, likeResolution, log
 
 //createUser
 router.post("/create", createUser)
-router.post("/logout", logout);
+router.get("/logout", logout);
 
 
 //Is logged in

@@ -32,7 +32,7 @@ const saveResolution = async (req, res, next) => {
 }
 
 const isLoggedIn = async (req, res, next) => {
-  console.log("authenticated");
+  // console.log("authenticated");
   try {
     if (req.user) {
       res.json({
@@ -45,20 +45,17 @@ const isLoggedIn = async (req, res, next) => {
       next(new Errorx("Error ayaa"));
     }
   } catch (error) {
-    next(new Errorx("Error ayaa"));
+    next(new Errorx("Error ayaa",error));
   }
 }
 
 const logout = async (req, res, next) => {
-  try {
-    await req.logout();
-    await req.session.destroy(() => {
-      res.redirect("/user/isloggedin");
-    });
-    res.send("done")
-  } catch (error) {
-    next(new Errorx("Error getting resolutions ", 500))
-  }
+
+
+  req.logout(function(err){
+    if(err){return next(err)}
+    res.redirect("http://localhost:5173");
+})
 }
 //like resolution
 

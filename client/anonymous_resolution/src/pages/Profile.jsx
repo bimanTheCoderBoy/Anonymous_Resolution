@@ -13,9 +13,10 @@ const Profile = (props) => {
     const [active, setActive] = useState(0);
     const [res, setRes] = useState([]);
     const logoutTest = async () => {
-        console.log("dddd");
-        const v = await axios.post("http://localhost:8001/user/logout", { withCredentials: true })
-        console.log(v);
+        // console.log("dddd");
+        // const v = await axios.post("http://localhost:8001/user/logout", { withCredentials: true })
+        // console.log(v);
+        window.open("http://localhost:8001/user/logout","_self")
     }
 
     const getOwnRes = async () => {
@@ -25,10 +26,11 @@ const Profile = (props) => {
                 headers: { "Content-type": "application/json" },
                 withCredentials: true,
             });
+
             setRes(resp.data.resolutions);
-            console.log(resp.data.resolutions);
+            console.log(resp);
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             toast.error("Oops Something Went Wrong");
         }
     }
@@ -69,7 +71,7 @@ const Profile = (props) => {
                 <div className="bg-backlight-50 dark:bg-slate-600 profile-posts">
                     {
                         res?.map((ele, i) => (
-                            <Card key={i} content={ele.data.resolutions} createdAt={ele.createdAt} />
+                            <Card key={i} content={ele._doc.data.resolutions} createdAt={ele.createdAt} />
                         ))
                     }
                 </div>
