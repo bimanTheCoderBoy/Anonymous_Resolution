@@ -55,10 +55,21 @@ const logout = async (req, res, next) => {
     await req.session.destroy(() => {
       res.redirect("/user/isloggedin");
     });
+    res.send("done")
   } catch (error) {
-    next(new Errorx("Error logging out", 404))
+    next(new Errorx("Error getting resolutions ", 500))
+  }
+}
+//like resolution
+
+const likeResolution = async (req, res, next) => {
+  try {
+    await UserService.likeResolution(req.body)
+    res.send("done")
+  } catch (error) {
+    next(new Errorx("Error getting resolutions ", 500))
   }
 }
 
 
-module.exports = { createUser, getYourSavedResolutions, saveResolution, logout, isLoggedIn }
+module.exports = { createUser, getYourSavedResolutions, saveResolution, likeResolution, logout, isLoggedIn }

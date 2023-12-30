@@ -33,6 +33,16 @@ const getYourResolutions=async(req,res,next)=>{
     }
    }
 
+const getResoluations=async(req,res,next)=>{
+   try {
+      const resolutions =await ResolutionService.getResoluations(req.params)
+         res.json({
+            resolutions
+         })
+   } catch (error) {
+      next(new Errorx("Error getting your resolutions ",500))
+   }
+}
 
 
 
@@ -43,5 +53,4 @@ const getYourResolutions=async(req,res,next)=>{
 
 
 
-
-module.exports={createResolution, deleteResolution, getYourResolutions}
+module.exports={createResolution, deleteResolution, getYourResolutions,getResoluations}

@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
       type:[mongoose.Schema.Types.ObjectId],
       ref:"Resolution"
     },
+    grows:{
+      type:[mongoose.Schema.Types.ObjectId],
+      ref:"Resolution"
+    },
     createdAt: {
       type: Date,
       default: Date.now,
