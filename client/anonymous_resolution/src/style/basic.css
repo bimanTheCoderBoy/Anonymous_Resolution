@@ -1,0 +1,11 @@
+.headline {
+    background: linear-gradient(45deg, #ff7300, #e400ff, #00d9ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.quotes {
+    background: linear-gradient(45deg, #0400ff, #8800ff, #0015ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
