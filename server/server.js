@@ -79,7 +79,7 @@ const runserver = async () => {
 
 
     //authMiddleware
-    app.use(authMiddleware)
+    // app.use(authMiddleware)
    //routes
    app.use('/user', userRoutes)
    app.use('/resolution', resolutionRoutes)

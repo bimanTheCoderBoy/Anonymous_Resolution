@@ -30,7 +30,17 @@ const getYourSavedResolutions=async(req,res,next)=>{
    next(new Errorx("Error getting resolutions ",500))
  }
  }
+//like resolution
 
+const likeResolution=async(req,res,next)=>{
+  try {
+    await UserService.likeResolution(req.body)
+      res.send("done")
+ } catch (error) {
+   next(new Errorx("Error getting resolutions ",500))
+ }
+}
+ //logout
  const logout=async(req,res,next)=>{
   try {
    await req.logout((err)=>{
@@ -43,4 +53,4 @@ const getYourSavedResolutions=async(req,res,next)=>{
  }
 
  
-module.exports= {createUser,getYourSavedResolutions,saveResolution,logout}
+module.exports= {createUser,getYourSavedResolutions,saveResolution,likeResolution,logout}

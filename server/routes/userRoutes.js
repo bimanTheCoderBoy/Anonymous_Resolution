@@ -1,6 +1,6 @@
 const express=require("express") 
 const router=express.Router() 
-const {createUser,getYourSavedResolutions,saveResolution,logout}=require("../controllers/user")
+const {createUser,getYourSavedResolutions,saveResolution,likeResolution,logout}=require("../controllers/user")
 
 
 //createUser
@@ -11,5 +11,6 @@ router.post("/logout",logout);
 router.post("/saveresolution",saveResolution)
 //get your saved resolutions
 router.get("/getsavedresolutions",getYourSavedResolutions)
-
+//do like
+router.put('/likeresolution',likeResolution );
 module.exports=router
