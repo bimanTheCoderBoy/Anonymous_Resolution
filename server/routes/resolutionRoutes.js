@@ -1,6 +1,6 @@
 const express=require("express") 
 const router=express.Router() 
-const {createResolution, deleteResolution, getYourResolutions,}=require("../controllers/resolution")
+const {createResolution, deleteResolution, getYourResolutions,getResoluations}=require("../controllers/resolution")
 
 
 
@@ -11,7 +11,7 @@ router.delete("/delete",deleteResolution)
 //get your own resolution
 router.get("/ownresolutions",getYourResolutions)
 
-
+router.get("/getResoluations/:num",getResoluations)
 
 
 module.exports=router

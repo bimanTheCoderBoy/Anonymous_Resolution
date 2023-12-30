@@ -1,4 +1,5 @@
-const Resolution =require("../models/Resolution")
+const Resolution =require("../models/Resolution");
+const User = require("../models/User");
 class ResolutionService{
     static async createResolution({creatorId,resolutions,thought}){
        
@@ -21,7 +22,17 @@ class ResolutionService{
     static async getYourResolutions({creatorId}){
         return await Resolution.find({"creatorId": creatorId});
     }
-
+    static async mapResolution(userId,resolutions){
+        const user=User.findById(userId).populate(['saved','grows']);
+        if(!user) throw new Error('No such user');
+        // resolutions=resolutions.map((ele)=>{
+        //     if(user.saved.contains())
+        // })
+    }
+    static async getResoluations(num){
+        const resolutions=await Resolution.find({}).sort({fieldName:"createdAt"}).skip(num).limit(num+50);
+        return resolutions;
+    }
 
 }
 
