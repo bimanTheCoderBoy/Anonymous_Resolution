@@ -6,7 +6,19 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          50: '#0ebeb5',
+        },
+        pink: {
+          50: '#d62976'
+        },
+        backlight: {
+          50: '#cddfe6'
+        }
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin'),
