@@ -20,15 +20,28 @@ class ResolutionService{
     }
 
     static async getYourResolutions({creatorId}){
-        return await Resolution.find({"creatorId": creatorId});
+        let resolutions= await Resolution.find({"creatorId": creatorId});
+        resolutions=await ResolutionService.mapResolution(creatorId,resolutions)
+        return resolutions;
     }
+
+
     static async mapResolution(userId,resolutions){
         const user=User.findById(userId).populate(['saved','grows']);
         if(!user) throw new Error('No such user');
-        // resolutions=resolutions.map((ele)=>{
-        //     if(user.saved.contains())
-        // })
+        resolutions=resolutions.map((ele)=>{
+            return {
+                ...ele,
+                isSaved:true,
+                isLiked:true
+            }
+        })
+
+        return resolutions
     }
+
+
+
     static async getResoluations(num){
         const resolutions=await Resolution.find({}).sort({fieldName:"createdAt"}).skip(num).limit(num+50);
         return resolutions;

@@ -1,5 +1,6 @@
 const Resolution = require("../models/Resolution");
-const User=require("../models/User")
+const User=require("../models/User");
+const ResolutionService = require("./resolution");
 class UserService{
     static async createUser({email}){
         try {
@@ -19,17 +20,9 @@ class UserService{
 
     //get your saved resolution
     static async getYourSavedResolutions({userId}){
-        const user=await User.findById(userId).populate(['saved','grows']);
+        const user=await User.findById(userId).populate('saved');
         let resolutions=user.saved;
-        let liked
-        resolutions=resolutions.map((ele)=>{
-
-            return {
-                ...ele,
-                isSaved:true,
-
-            }
-        })
+        resolutions=await ResolutionService.mapResolution(userId,resolutions);
 
         return resolutions;
     }
