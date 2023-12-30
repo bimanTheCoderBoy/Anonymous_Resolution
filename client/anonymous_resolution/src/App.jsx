@@ -9,36 +9,54 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import AddPost from "./pages/AddPost";
 import SinglePost from './pages/SinglePost';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Landing from './pages/Langing';
-// import Login from './pages/Login';
 // import ""
-
-const login = false;
-
+const authApi = "http://localhost:8001/user/isloggedin"
 function App() {
+  const [auth, checkAuth] = useState(false);
+  const [profile, setProfile] = useState({});
+  let response;
+  const uservalidation = async () => {
+    try {
+      var response = await axios.get(authApi, { withCredentials: true });
+      setProfile(response.data.user);
+      checkAuth(true);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  useEffect(() => {
+    uservalidation();
+  }, [])
   return (
     <>
       <BrowserRouter>
+        <Toaster />
         {
-          login ?
-            <>
-              <Toaster />
-              <div className="h-screen flex flex-col bg-white dark:bg-slate-800">
-                <Header />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/add-post" element={<AddPost />} />
-                  <Route path="/single-post/:id" element={<SinglePost />} />
-                </Routes>
-                <Navs />
-              </div>
-            </> :
+          !auth ?
             <div className="h-screen flex flex-col">
               <Routes>
                 <Route path="/" element={<Landing />} />
               </Routes>
+            </div>
+            :
+            <div className="h-screen flex flex-col bg-white dark:bg-slate-800">
+              <Header />
+              <Routes>
+
+                <>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile profile={profile} />} />
+                  <Route path="/add-post" element={<AddPost id={profile._id} />} />
+                  <Route path="/single-post/:id" element={<SinglePost />} />
+                </>
+
+
+              </Routes>
+              <Navs />
             </div>
         }
       </BrowserRouter>

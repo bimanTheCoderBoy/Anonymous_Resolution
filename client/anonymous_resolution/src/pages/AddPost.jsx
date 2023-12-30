@@ -2,19 +2,46 @@ import { useState } from "react"
 import "../style/addPost.css"
 import { toast } from 'react-hot-toast';
 import { TiTick } from "react-icons/ti";
+import axios from "axios";
 
-const AddPost = () => {
-    const [content, setContent] = useState(["JYotitti", "dsafas"]);
+const addPostAPI = "http://localhost:8001/resolution/create";
+
+const AddPost = (props) => {
+    const [content, setContent] = useState([]);
+    const [thoughts, setThoughts] = useState("");
+    //Post A Resolution
+    const PostResolution = async () => {
+        try {
+            const body = {
+                creatorId: props.id,
+                resolutions: content,
+                thought: thoughts
+            }
+            const a = await axios.post(addPostAPI, JSON.stringify(body), {
+                headers: { "Content-type": "application/json" },
+                withCredentials: true,
+            })
+            setThoughts("");
+            setContent([]);
+            setTemp("");
+            if (a) {
+                toast.success("Uploaded");
+            }
+        } catch (error) {
+            console.log("Not Uploaded");
+        }
+    }
+
 
     const addCont = () => {
         if (!temp)
             return
         const a = content;
         a.push(temp);
-        console.log(temp);
         setTemp("");
         setContent([...a]);
     }
+
     const [temp, setTemp] = useState("");
     const submit = () => {
         toast.success("Uploaded");
@@ -26,7 +53,7 @@ const AddPost = () => {
             <div className="w-11/12 mt-6 mx-auto p-5 max-h-72 overflow-scroll text-slate-900 dark:text-slate-300 bg-white dark:bg-slate-800 shadow-slate-800 dark:shadow-slate-300 added-res">
                 <ul>
                     {
-                        content.map((str, index) => (
+                        content?.map((str, index) => (
                             <li key={index}>{str}</li>
                         ))
                     }
@@ -37,7 +64,7 @@ const AddPost = () => {
                 <button className="w-8 h-8 bg-teal-800 dark:bg-teal-400 rounded-full flex justify-center items-center text-white text-2xl" onClick={() => { addCont() }}><TiTick /></button>
             </div>
             <div className="w-full flex justify-center">
-                <button className=" h-12 w-2/6 rounded-md shadow bg-primary-50 tracking-widest final-upload">Post</button>
+                <button className=" h-12 w-2/6 rounded-md shadow bg-primary-50 tracking-widest final-upload" onClick={() => PostResolution()}>Post</button>
             </div>
             <div className="m-5 ms-10 text-slate-800 dark:text-slate-400 info">
                 Step 1: Write your resolution<br />
@@ -47,7 +74,7 @@ const AddPost = () => {
                 Step 5: Post your New Year's Resolution<br />
             </div>
             <div className="w-10/12 mx-auto flex justify-evenly items-center py-12">
-                <textarea name="thoughts" placeholder="Your Thoughts(Optional)" className="min-h-8 dark:bg-slate-300" id="" cols="40" rows="2"></textarea>
+                <textarea name="thoughts" placeholder="Your Thoughts(Optional)" className="min-h-8 dark:bg-slate-300" id="" cols="40" rows="2" value={thoughts} onChange={(e) => setThoughts(e.target.value)}></textarea>
             </div>
 
         </div>

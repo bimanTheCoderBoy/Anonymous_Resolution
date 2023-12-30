@@ -13,14 +13,14 @@ const session = require("express-session")
 const passport = require("passport")
 const UserService = require("./services/user")
 const OAuth2Strategy = require("passport-google-oauth20").Strategy;
-const authMiddleware=require("./utils/auth/auth")
+const authMiddleware = require("./utils/auth/auth")
 
 const runserver = async () => {
     const app = express();
     await dbConnect();
     //Middleware
     app.use(cors({
-        origin: "*",
+        origin: "http://localhost:5173",
         methods: "GET,POST,DELETE",
         credentials: true
     }))
@@ -28,7 +28,7 @@ const runserver = async () => {
     //json data parsing
     app.use(express.json())
 
- 
+
 
 
     //session Setup
@@ -51,7 +51,7 @@ const runserver = async () => {
         },
             async (accessToken, refreshToken, profile, done) => {
                 try {
-                  const user=await UserService.createUser({email: profile.emails[0].value})
+                    const user = await UserService.createUser({ email: profile.emails[0].value })
                     return done(null, user)
                 } catch (error) {
                     return done(error, null)
@@ -79,18 +79,14 @@ const runserver = async () => {
 
 
     //authMiddleware
-    app.use(authMiddleware)
-   //routes
-   app.use('/user', userRoutes)
-   app.use('/resolution', resolutionRoutes)
-   app.use('/thought', thoughtRoutes)
-   //middleware for error handling
-   app.use(errHandler)
+    // app.use(authMiddleware)
+    //routes
+    app.use('/user', userRoutes)
+    app.use('/resolution', resolutionRoutes)
+    app.use('/thought', thoughtRoutes)
+    //middleware for error handling
+    app.use(errHandler)
 
-    app.get("/*", (req, res) => {
-        console.log("authenticated");
-        res.send("ok server working")
-    })
     const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {
         console.log(`listening on http://localhost:${PORT}`);
