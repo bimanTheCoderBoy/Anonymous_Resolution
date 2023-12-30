@@ -1,7 +1,7 @@
 .resolution-text {
     font-weight: 800;
     font-size: 2rem;
-    background: linear-gradient(45deg, #ff7300, #e400ff, #00bfff);
+    background: linear-gradient(45deg, #ff7300, #e400ff, #ccff00);
     -webkit-background-clip: text;
     color: transparent;
     margin: 0;
@@ -9,30 +9,27 @@
     letter-spacing: 0.2rem;
 }
 
-.add-textarea {
-    padding: 1rem;
-    outline: none;
-    border: none;
-    letter-spacing: 0.2rem;
-    box-shadow: inset 2px 2px 5px black;
-    border-radius: 1rem;
-    margin: 0;
-}
+.added-res {}
 
-.add-textarea:focus {
-    outline: none;
-    box-shadow: 2px 2px 5px black;
+.info {
+    font-size: 0.7rem;
 }
 
 .post-btn {
     height: 3rem;
     width: 8rem;
-    border-radius: 3rem;
-    background: linear-gradient(45deg, #ff7300, #e400ff, #00bfff);
-    /* background-color: #0ebeb5; */
-    /* box-shadow: 2px 2px 5px black; */
+    background-color: #0ebeb5;
 }
 
-.post-btn:focus {
-    box-shadow: none;
+.add-content-temp {
+    outline: none;
+    border: none;
+    box-shadow: inset 2px 2px 3px grey;
+}
+
+.add-content-temp:active,
+.add-content-temp:focus {
+    box-shadow: inset 2px 2px 3px grey;
+    outline: none;
+    border: none;
 }

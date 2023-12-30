@@ -9,11 +9,12 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import AddPost from "./pages/AddPost";
 import SinglePost from './pages/SinglePost';
-import { useState } from 'react';
+
+
 // import ""
 
 function App() {
-  const [title, setTitle] = useState("Home");
+
   return (
     <>
       <BrowserRouter>

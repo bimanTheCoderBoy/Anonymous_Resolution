@@ -38,7 +38,7 @@ const Navs = () => {
                 </NavLink>
                 <NavLink to="/add-post" className="text-2xl text-gray-500  dark:text-zinc-200 grow flex justify-center" >
                     {
-                        active === 1 ? <MdAddCircleOutline className="text-primary-50 shadow-lg shadow-cyan-500/50" /> : <MdAddCircleOutline />
+                        active === 1 ? <MdAddCircleOutline className="text-primary-50" /> : <MdAddCircleOutline />
                     }
                 </NavLink>
                 <NavLink to="/profile" className="text-2xl text-gray-500 dark:text-zinc-200 grow flex justify-center" >
