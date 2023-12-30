@@ -31,6 +31,16 @@ const getYourSavedResolutions=async(req,res,next)=>{
  }
  }
 
+ const logout=async(req,res,next)=>{
+  try {
+   await req.logout((err)=>{
+     console.log("logout hit");
+    });
+    res.send("logged out")
+  } catch (error) {
+    next(new Errorx("Error logging out",404))
+  }
+ }
 
  
-module.exports= {createUser,getYourSavedResolutions,saveResolution}
+module.exports= {createUser,getYourSavedResolutions,saveResolution,logout}

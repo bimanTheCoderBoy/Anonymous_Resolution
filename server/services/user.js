@@ -2,11 +2,13 @@ const User=require("../models/User")
 class UserService{
     static async createUser({email}){
         try {
-            const isAlreadyUser=await User.findOne({email});
-            if(!isAlreadyUser){
-            const user=await User.create({email})
+            let user=await User.findOne({email});
+            if(!user){
+             user=await User.create({email})
             user.save();
+            
             }
+            return user
         } catch (error) {
             throw new Error("Creating User Error")
         }

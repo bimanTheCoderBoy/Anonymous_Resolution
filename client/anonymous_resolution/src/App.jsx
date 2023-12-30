@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import AddPost from "./pages/AddPost";
 import SinglePost from './pages/SinglePost';
 import { useState } from 'react';
+import Login from './pages/Login';
 // import ""
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
         <div className="h-screen flex flex-col bg-white dark:bg-slate-800">
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-post" element={<AddPost />} />
             <Route path="/single-post/:id" element={<SinglePost />} />
