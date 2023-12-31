@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import axios from "axios";
-const getResApi="http://localhost:8001/resolution/getresolutions/"
+const getResApi="/resolution/getresolutions/"
 import { MdDownloading } from "react-icons/md";
 const Home = ({userId}) => {
     const [resolutions, addResolutions]=useState([]);

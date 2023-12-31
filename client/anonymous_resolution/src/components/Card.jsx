@@ -13,8 +13,8 @@ import { toast } from 'react-hot-toast';
 const like = true;
 const bookmark = false;
 
-const saveUrl = "http://localhost:8001/user/saveresolution";
-const likeApi="http://localhost:8001/user/likeresolution"
+const saveUrl = "/user/saveresolution";
+const likeApi="/user/likeresolution"
 const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
     let dateTime;
     let istTime;
