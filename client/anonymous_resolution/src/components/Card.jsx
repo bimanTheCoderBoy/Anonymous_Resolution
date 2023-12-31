@@ -5,17 +5,21 @@ import { FaRegComment } from "react-icons/fa";
 import "../style/card.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useState } from "react";
+import copy from 'clipboard-copy';
+import { toast } from 'react-hot-toast';
+// import {} from
 
 const like = true;
 const bookmark = false;
 
 const saveUrl = "http://localhost:8001/user/saveresolution";
-
+const likeApi="http://localhost:8001/user/likeresolution"
 const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
     let dateTime;
     let istTime;
-    console.log(content);
+    const [isLikeds ,setisLikeds]=useState(isLiked)
+    const [isSaveds ,setisSaveds]=useState(isSaved)
     const setDate = () => {
         dateTime = new Date(createdAt);
         const options = {
@@ -42,19 +46,38 @@ const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
                 withCredentials: true,
             });
             console.log(a);
+            setisSaveds((prev)=>!prev)
         } catch (error) {
-            console.log("not saved")
+            console.log(error)
         }
     }
-    const resLiked = () => {
+    const resLiked = async() => {
+        try {
+            const body = {
+                userId: userId,
+                resolutionId: id
+            }
+            const a = await axios.put(likeApi, JSON.stringify(body), {
+                headers: { "Content-type": "application/json" },
+                withCredentials: true,
+            });
+            setisLikeds((prev)=>!prev)
+            console.log(a);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
+   const copyToBoard=async()=>{
+        await copy(`http://localhost:5173/single-post/${id}`)
+        toast.success("copid to clipboard");
     }
 
     return (
         <>
             <div className="min-h-40 bg-white dark:bg-slate-800 dark:shadow-sm dark:shadow-cyan-500/50 shrink-0 p-6 pt-9 pb-4 flex flex-col gap-4 relative post-card">
-                <div className="absolute text-primary-50 top-3 right-3 flex gap-2 items-center card-share">
-                    <FaShare /> Share
+                <div onClick={()=>{copyToBoard()}} className="absolute text-primary-50 top-3 right-3 flex gap-2 items-center card-share">
+                    <FaShare  /> Share
                 </div>
                 <div className=" text-gray-900 text-lg dark:text-gray-300 tracking-wider mb-auto me-12 card-content" onClick={() => Navigate(`/single-post/${id}`)}>
                     {
@@ -69,8 +92,8 @@ const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
                 <div className="flex text-lg border-t-2 p-2 text-gray-500 dark:text-gray-400 justify-evenly card-actions">
                     <div className="grow flex items-center justify-center gap-2 card-like">
                         {
-                            isLiked ?
-                                <GoHeartFill className="like-active" />
+                            isLikeds ?
+                                <GoHeartFill onClick={() => resLiked()} className="like-active" />
                                 :
                                 <GoHeart onClick={() => resLiked()} />
                         } like
@@ -80,7 +103,7 @@ const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
                     </div>
                     <div className="grow flex items-center justify-center gap-2 card-bookmark">
                         {
-                            isSaved ?
+                            isSaveds ?
                                 <BsBookmarkCheckFill className="bookmark-active" onClick={() => resSaved()} />
                                 :
                                 <BsBookmarkCheck onClick={() => resSaved()} />

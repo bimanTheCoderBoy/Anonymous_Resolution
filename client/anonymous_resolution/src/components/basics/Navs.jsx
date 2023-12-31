@@ -31,7 +31,7 @@ const Navs = () => {
     }, [location]);
     return (
         <>
-            <div className="bg-white dark:bg-slate-900 h-16 border-t-2 shrink-0 flex justify-center items-center border-top-width: 2px">
+            <div className="bg-white sticky bottom-0 left-0 right-0 dark:bg-slate-900 h-16 border-t-2 shrink-0 flex justify-center items-center border-top-width: 2px">
                 <NavLink to="/" className="text-2xl text-gray-500 dark:text-zinc-200 grow flex justify-center" >
                     {
                         active === 0 ? <SiHomeassistant className="text-primary-50 shadow-lg shadow-cyan-500/50" /> : <SiHomeassistant className="" />

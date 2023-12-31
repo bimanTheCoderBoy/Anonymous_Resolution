@@ -11,7 +11,7 @@ router.post("/delete", deleteResolution)
 //get your own resolution
 router.post("/ownresolutions", getYourResolutions)
 
-router.get("/getResolutions/:num", getResoluations)
+router.get("/getresolutions/:userid/:num", getResoluations)
 
 router.get("/getsingleresolution/:id", getSingleResolution);
 

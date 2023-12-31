@@ -124,7 +124,7 @@ const Profile = (props) => {
                     {
                         res?.map((ele, i) => (
                             <div className="flex flex-col relative" key={i}>
-                                <Card content={ele._doc.data.resolutions} id={ele._doc._id} createdAt={ele._doc.createdAt} isSaved={ele.isLiked} isLiked={ele.isSaved} userId={props.profile._id} />
+                                <Card content={ele._doc.data.resolutions} id={ele._doc._id} createdAt={ele._doc.createdAt} isSaved={ele.isSaved} isLiked={ele.isLiked} userId={props.profile._id} />
                                 <div className="absolute right-3 bottom-3 postDeleteBtn" onClick={() => { togglePop(ele._doc._id); }}><FaRegTrashCan /></div>
                             </div>
                         ))

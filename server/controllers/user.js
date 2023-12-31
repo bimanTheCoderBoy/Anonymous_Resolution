@@ -54,7 +54,7 @@ const logout = async (req, res, next) => {
 
   req.logout(function(err){
     if(err){return next(err)}
-    res.redirect("http://localhost:5173");
+    res.redirect(process.env.CLIENT_URL);
 })
 }
 //like resolution

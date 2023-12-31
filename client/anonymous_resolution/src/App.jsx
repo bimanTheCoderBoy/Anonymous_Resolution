@@ -29,6 +29,7 @@ function App() {
 
   }
   useEffect(() => {
+    // console.log(process.env.TRY||"NOT tryting");
     uservalidation();
   }, [])
   return (
@@ -49,7 +50,7 @@ function App() {
               <Routes>
 
                 <>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<Home userId={profile._id}/>} />
                   <Route path="/profile" element={<Profile profile={profile} />} />
                   <Route path="/add-post" element={<AddPost id={profile._id} />} />
                   <Route path="/single-post/:id" element={<SinglePost Userid={profile._id} />} />

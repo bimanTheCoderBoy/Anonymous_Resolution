@@ -27,13 +27,21 @@ class ResolutionService {
 
 
     static async mapResolution(userId, resolutions) {
-        const user = User.findById(userId).populate(['saved', 'grows']);
+        const user =await User.findById(userId);
         if (!user) throw new Error('No such user');
-        resolutions = resolutions.map((ele) => {
+            // console.log(user);
+            //console.log(user);
+
+        resolutions =  resolutions.map((ele) => {
+                //console.log(ele);
+            
+              const  isSaved = user.saved.includes(ele._id);
+              const  isLiked = user.grows.includes(ele._id);
+               // console.log( user.saved.includes(ele._id));
             return {
                 ...ele,
-                isSaved: true,
-                isLiked: true
+                isSaved,
+                isLiked
             }
         })
 
@@ -47,8 +55,10 @@ class ResolutionService {
 
 
 
-    static async getResoluations(num) {
-        const resolutions = await Resolution.find({}).sort({ fieldName: "createdAt" }).skip(num).limit(num + 50);
+    static async getResoluations({userid,num}) {
+        let resolutions = await Resolution.find({}).sort( "-createdAt").skip(num).limit(num + 50);
+        // console.log(resolutions);
+        resolutions=await ResolutionService.mapResolution(userid, resolutions)
         return resolutions;
     }
 

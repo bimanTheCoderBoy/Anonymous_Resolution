@@ -40,6 +40,7 @@ const getYourResolutions = async (req, res, next) => {
 
 const getResoluations = async (req, res, next) => {
    try {
+      // console.log(req.params);
       const resolutions = await ResolutionService.getResoluations(req.params)
       res.json({
          resolutions

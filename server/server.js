@@ -20,8 +20,8 @@ const runserver = async () => {
     await dbConnect();
     //Middleware
     app.use(cors({
-        origin: "http://localhost:5173",
-        methods: "GET,POST,DELETE",
+        origin: process.env.CLIENT_URL,
+        methods: "GET,POST,DELETE,PUT",
         credentials: true
     }))
 
@@ -72,8 +72,8 @@ const runserver = async () => {
     app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
     app.get("/auth/google/callback", passport.authenticate("google", {
-        successRedirect: "http://localhost:5173",
-        failureRedirect: "http://localhost:5173/login"
+        successRedirect:  process.env.CLIENT_URL,
+        failureRedirect:  process.env.CLIENT_URL+"/login"
     }))
 
 
