@@ -5,8 +5,11 @@ class ThoughtService {
         thought.save()
     }
 
-    static async getThoughts({ resolutionId }) {
-        return await Thought.find({ resolutionId: resolutionId })
+    static async getThoughts(resolutionId) {
+
+        const a = await Thought.find({ resolutionId: resolutionId })
+        console.log(a);
+        return a;
     }
 
     static async deleteThought({ userId, thoughtId }) {

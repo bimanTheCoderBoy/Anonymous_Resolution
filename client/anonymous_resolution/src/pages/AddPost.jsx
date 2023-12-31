@@ -68,7 +68,7 @@ const AddPost = (props) => {
             </div>
             <div className="m-5 ms-10 text-slate-800 dark:text-slate-400 info">
                 Step 1: Write your resolution<br />
-                Step 2: Click on sdd button<br />
+                Step 2: Click on add button<br />
                 Step 3: Again write your next resolution<br />
                 Step 4: After completion you can also add your thoughts below<br />
                 Step 5: Post your New Year's Resolution<br />

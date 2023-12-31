@@ -1,17 +1,19 @@
 const express = require("express")
 const router = express.Router()
-const { createResolution, deleteResolution, getYourResolutions, getResoluations } = require("../controllers/resolution")
+const { createResolution, deleteResolution, getYourResolutions, getResoluations, getSingleResolution } = require("../controllers/resolution")
 
 
 
 //createResolution
 router.post("/create", createResolution)
 //delete Resolution
-router.delete("/delete", deleteResolution)
+router.post("/delete", deleteResolution)
 //get your own resolution
 router.post("/ownresolutions", getYourResolutions)
 
-router.get("/getResoluations/:num", getResoluations)
+router.get("/getResolutions/:num", getResoluations)
+
+router.get("/getsingleresolution/:id", getSingleResolution);
 
 
 module.exports = router

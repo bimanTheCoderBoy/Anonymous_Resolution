@@ -1,53 +1,58 @@
-const Resolution =require("../models/Resolution");
+const Resolution = require("../models/Resolution");
 const User = require("../models/User");
-class ResolutionService{
-    static async createResolution({creatorId,resolutions,thought}){
-       
-        const data={
+class ResolutionService {
+    static async createResolution({ creatorId, resolutions, thought }) {
+
+        const data = {
             resolutions,
             thought
         }
-        const resolution =await Resolution.create({creatorId,data});
+        const resolution = await Resolution.create({ creatorId, data });
         resolution.save();
-        
-    }
-
-
-    static async deleteResolution({resolutionId}){
-    
-        await Resolution.deleteOne({_id:resolutionId})
 
     }
 
-    static async getYourResolutions({creatorId}){
-        let resolutions= await Resolution.find({"creatorId": creatorId});
-        resolutions=await ResolutionService.mapResolution(creatorId,resolutions)
+
+    static async deleteResolution({ resolutionId }) {
+
+        await Resolution.deleteOne({ _id: resolutionId })
+
+    }
+
+    static async getYourResolutions({ creatorId }) {
+        let resolutions = await Resolution.find({ "creatorId": creatorId });
+        resolutions = await ResolutionService.mapResolution(creatorId, resolutions)
         return resolutions;
     }
 
 
-    static async mapResolution(userId,resolutions){
-        const user=User.findById(userId).populate(['saved','grows']);
-        if(!user) throw new Error('No such user');
-        resolutions=resolutions.map((ele)=>{
+    static async mapResolution(userId, resolutions) {
+        const user = User.findById(userId).populate(['saved', 'grows']);
+        if (!user) throw new Error('No such user');
+        resolutions = resolutions.map((ele) => {
             return {
                 ...ele,
-                isSaved:true,
-                isLiked:true
+                isSaved: true,
+                isLiked: true
             }
         })
 
         return resolutions
     }
 
+    static async getSingleResolutions(resId) {
+        const res = await Resolution.findOne({ _id: resId });
+        return res;
+    }
 
 
-    static async getResoluations(num){
-        const resolutions=await Resolution.find({}).sort({fieldName:"createdAt"}).skip(num).limit(num+50);
+
+    static async getResoluations(num) {
+        const resolutions = await Resolution.find({}).sort({ fieldName: "createdAt" }).skip(num).limit(num + 50);
         return resolutions;
     }
 
 }
 
 
-module.exports= ResolutionService
+module.exports = ResolutionService

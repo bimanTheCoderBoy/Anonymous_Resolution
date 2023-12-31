@@ -40,6 +40,7 @@ function App() {
             <div className="h-screen flex flex-col">
               <Routes>
                 <Route path="/" element={<Landing />} />
+                <Route path="*" element={<Landing />} />
               </Routes>
             </div>
             :
@@ -51,7 +52,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/profile" element={<Profile profile={profile} />} />
                   <Route path="/add-post" element={<AddPost id={profile._id} />} />
-                  <Route path="/single-post/:id" element={<SinglePost />} />
+                  <Route path="/single-post/:id" element={<SinglePost Userid={profile._id} />} />
                 </>
 
 
