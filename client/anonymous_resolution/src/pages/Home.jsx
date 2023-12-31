@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import axios from "axios";
-const getResApi="/resolution/getresolutions/"
 import { MdDownloading } from "react-icons/md";
+const getResApi="resolution/getresolutions/"
 const Home = ({userId}) => {
     const [resolutions, addResolutions]=useState([]);
     function mapRes(obj){

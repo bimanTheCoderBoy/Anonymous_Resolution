@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Landing from './pages/Langing';
 // import ""
-const authApi = "/user/isloggedin"
+const authApi = "user/isloggedin"
 function App() {
   const [auth, checkAuth] = useState(false);
   const [profile, setProfile] = useState({});

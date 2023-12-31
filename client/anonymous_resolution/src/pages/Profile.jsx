@@ -8,9 +8,9 @@ import toast from "react-hot-toast";
 import { IoTrashBin } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
 
-const deleteResUrl = "/resolution/delete"
-const getOwnResUrl = "/resolution/ownresolutions";
-const getSavedResUrl = "/user/getsavedresolutions";
+const deleteResUrl = "resolution/delete"
+const getOwnResUrl = "resolution/ownresolutions";
+const getSavedResUrl = "user/getsavedresolutions";
 
 const Profile = (props) => {
     const Navigate = useNavigate();
@@ -18,7 +18,7 @@ const Profile = (props) => {
     const [res, setRes] = useState([]);
     const [deleteId, setDeleleId] = useState("");
     const logoutTest = async () => {
-        window.open("/user/logout", "_self")
+        window.open("user/logout", "_self")
     }
 
     const getOwnRes = async () => {

@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { TiTick } from "react-icons/ti";
 import axios from "axios";
 
-const addPostAPI = "/resolution/create";
+const addPostAPI = "resolution/create";
 
 const AddPost = (props) => {
     const [content, setContent] = useState([]);

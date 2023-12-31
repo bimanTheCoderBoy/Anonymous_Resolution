@@ -13,8 +13,8 @@ import { toast } from 'react-hot-toast';
 const like = true;
 const bookmark = false;
 
-const saveUrl = "/user/saveresolution";
-const likeApi="/user/likeresolution"
+const saveUrl = "user/saveresolution";
+const likeApi="user/likeresolution"
 const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
     let dateTime;
     let istTime;
@@ -69,7 +69,7 @@ const Card = ({ content, createdAt, id, userId, isLiked, isSaved }) => {
     }
 
    const copyToBoard=async()=>{
-        await copy(`http://localhost:5173/single-post/${id}`)
+        await copy(`https://resoluxe.netlify.app/single-post/${id}`)
         toast.success("copid to clipboard");
     }
 

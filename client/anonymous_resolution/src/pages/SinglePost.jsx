@@ -9,10 +9,10 @@ import { useParams } from "react-router-dom";
 const uid = 1, cmtid = 1;
 
 
-const getSingleResUrl = "/resolution/getsingleresolution"
-const getThoughtsUrl = "/thought/getthoughts";
-const addCmtUrl = "/thought/putthought";
-const deleteCmtUrl = "/thought/deletethought";
+const getSingleResUrl = "resolution/getsingleresolution"
+const getThoughtsUrl = "thought/getthoughts";
+const addCmtUrl = "thought/putthought";
+const deleteCmtUrl = "thought/deletethought";
 
 const SinglePost = ({ Userid }) => {
     let res;
