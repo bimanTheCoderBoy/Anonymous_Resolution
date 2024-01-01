@@ -2,7 +2,7 @@ import "../style/basic.css"
 import { FcGoogle } from "react-icons/fc";
 const Landing = () => {
     const loginwithgoogle = () => {
-        window.open("auth/google/callback", "_self")
+        window.open("https://resoluxe.onrender.com/auth/google/callback", "_self")
     }
     return (
         <div className="h-full bg-slate-200 dark:bg-slate-800">
