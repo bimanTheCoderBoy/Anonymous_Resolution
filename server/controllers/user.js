@@ -42,7 +42,7 @@ const isLoggedIn = async (req, res, next) => {
       })
     }
     else {
-      next(new Errorx("Error ayaa"));
+      next(new Errorx("Error ayaaaaaa"));
     }
   } catch (error) {
     next(new Errorx("Error ayaa",error));
