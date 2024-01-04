@@ -14,7 +14,7 @@ const passport = require("passport")
 const UserService = require("./services/user")
 const OAuth2Strategy = require("passport-google-oauth20").Strategy;
 const authMiddleware = require("./utils/auth/auth")
-
+const MongoDBStore = require('connect-mongodb-session')(session);
 const runserver = async () => {
     const app = express();
     await dbConnect();
@@ -31,11 +31,17 @@ const runserver = async () => {
 
 
 
+    const store = new MongoDBStore({
+        uri: process.env.MONGO_URI+'/Resoluxe',
+        collection: 'sessions',
+    });
+
     //session Setup
     app.use(session({
         secret: process.env.SESSION_SECRET || "nvnvnvbvnbvvbvbv",
         resave: false,
         saveUninitialized: true,
+        store
     }))
 
     //passport Setup
@@ -72,8 +78,8 @@ const runserver = async () => {
     app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
     app.get("/auth/google/callback", passport.authenticate("google", {
-        successRedirect:  process.env.CLIENT_URL,
-        failureRedirect:  process.env.CLIENT_URL+"/login"
+        successRedirect: process.env.CLIENT_URL,
+        failureRedirect: process.env.CLIENT_URL + "/login"
     }))
 
 
