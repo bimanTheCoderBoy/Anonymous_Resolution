@@ -35,7 +35,9 @@ const runserver = async () => {
         uri: process.env.MONGO_URI+'/Resoluxe',
         collection: 'sessions',
     });
-
+    store.on('error', function(error) {
+        console.log(error);
+      });
     //session Setup
     app.use(session({
         secret: process.env.SESSION_SECRET || "nvnvnvbvnbvvbvbv",
