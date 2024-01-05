@@ -33,6 +33,7 @@ const saveResolution = async (req, res, next) => {
 
 const isLoggedIn = async (req, res, next) => {
   // console.log("authenticated");
+  console.log(req);
   try {
     if (req.user) {
       res.json({
